@@ -35,7 +35,12 @@
         button=document.createElement("button");
         button.textContent="Delete";
         button.className="btn btn-danger delete";
+        
+        
+        button.addEventListener("click",function(){
 
+           li.style.display="none"
+        })
         ul.appendChild(li);
         li.appendChild(button);
        })
@@ -44,11 +49,6 @@
     //      console.log(working);
     
     //    })
-            button.addEventListener("click",function(){
-
-           li.style.display="none";
-           
-        })
     </script>
 </body>
 </html>
