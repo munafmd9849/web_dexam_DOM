@@ -3,52 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style type="text/css">
-        li{
+    <title>Task Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+          crossorigin="anonymous">
+    <style>
+        li {
             list-style: none;
-            margin-top: 20px;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .delete:target{
-            display: none;
-        }
-        
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
+    <div class="container mt-4">
         <h2>Task Manager</h2>
-
-        <input type="text" id="input" size="25" > <button class="btn btn-success">Add Task</button>
+        <div class="input-group mb-3">
+            <input type="text" id="input" class="form-control" placeholder="Enter Task">
+            <button class="btn btn-success" id="add-btn">Add Task</button>
+        </div>
+        <ul id="task-list" class="list-group"></ul>
+    </div>
 
     <script>
-        ul=document.createElement("ul");
+        const addButton = document.getElementById("add-btn");
+        const inputField = document.getElementById("input");
+        const taskList = document.getElementById("task-list");
 
-        document.querySelector("button").addEventListener("click",function(){
-           li = document.createElement("li");
-       
-        present=input=document.getElementById("input").value;
-        console.log(present)
-        li.textContent=present;
-        li.className="deleteli";
-        button=document.createElement("button");
-        button.textContent="Delete";
-        button.className="btn btn-danger delete";
-        
-        
-        button.addEventListener("click",function(){
+        addButton.addEventListener("click", () => {
+            const taskText = inputField.value.trim();
+            if (taskText !== "") {
+                const li = document.createElement("li");
+                li.className = "list-group-item d-flex justify-content-between align-items-center";
+                li.textContent = taskText;
 
-           li.style.display="none"
-        })
-        ul.appendChild(li);
-        li.appendChild(button);
-       })
-       document.body.appendChild(ul);
-    //    document.getElementsByClassName("delet").addEventListener("click",function(){
-    //      console.log(working);
-    
-    //    })
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.className = "btn btn-danger";
+                deleteButton.onclick = () => li.remove();
+
+                li.appendChild(deleteButton);
+                taskList.appendChild(li);
+
+                inputField.value = "";
+            }
+        });
     </script>
 </body>
 </html>
